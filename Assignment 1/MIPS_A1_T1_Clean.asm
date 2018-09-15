@@ -3,7 +3,7 @@
 	programEndString:	.asciiz 	"Program Has Ended"
 
 .data 0x10010080
-	eraseString:		.asciiz 	"***************************************************************\n"	
+	eraseString:		.asciiz 	"***************************************************************"	
 	
 .data 0x100100c0	
 	separaterString1:	.asciiz		"--------------------------------"
