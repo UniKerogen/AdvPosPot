@@ -16,6 +16,11 @@
 
 .text 
 
+## !!!!READ THIS!!!
+## The Clean Up seciton is not necessary. It is there for organizing the result
+## Run with out Clean Up section if you DO NOT want to you break point
+
+
 main:
 	#Prompt To Input
 	la 	$a0,	firstPromptString
