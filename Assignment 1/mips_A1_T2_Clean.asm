@@ -9,17 +9,17 @@
 
 main:
 	#Prompt To Input
-	la 	$a0,	firstPromptString
-	li	$v0,	4
+	la 	$a0,	firstPromptString	
+	li	$v0,	4			# 4 is the system call for print
 	syscall 
 	
 	#Input Reading
-	li	$v0,	5
+	li	$v0,	5			# 5 is the system call for reading integer
 	syscall
-	move	$a0,	$v0	#Input is stored in a0
+	move	$a0,	$v0			#Input is stored in a0
 	
 	jal	fact
-	move	$t1,	$v0	#Output is stored in t1
+	move	$t1,	$v0			#Output is stored in t1
 	
 	#Print the Result
 	la	$a0,	answerString
