@@ -3,7 +3,7 @@
 	programEndString:	.asciiz 	"Program Has Ended"
 
 .data 0x10010080
-	eraseString:		.asciiz 	"****************************************************************"	
+	eraseString:		.asciiz 	"***************************************************************\n"	
 	
 .data 0x100100c0	
 	separaterString1:	.asciiz		"--------------------------------"
@@ -35,14 +35,14 @@ main:
 	jal	strcpy
 
 cleanUp:
-	la	$a0,	inputString
+	la	$a0,	inputString		#Put a break point in front of this line to see the result
 	la	$a1,	eraseString
 	jal	strcpy
 	la	$a0,	storageArea
 	la	$a1,	inputString
 	jal	strcpy
 	
-loop:	j	main
+loop:	j	main				
 
 #String Copy Subfunction
 strcpy:
