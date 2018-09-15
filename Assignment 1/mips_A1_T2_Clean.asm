@@ -7,6 +7,10 @@
 
 .text 	
 
+## !!!Read This!!!
+## deividerString is not necessary.
+## Formatting part is not necessary. Refer below for details.
+
 main:
 	#Prompt To Input
 	la 	$a0,	firstPromptString	
@@ -22,26 +26,26 @@ main:
 	move	$t1,	$v0			#Output is stored in t1
 	
 	#Print the Result
-	la	$a0,	answerString
+	la	$a0,	answerString		#Print the first part of the answer
 	li	$v0,	4
 	syscall
 	
-	move	$a0,	$t1
+	move	$a0,	$t1			#Print the number of the answer
 	li	$v0,	1
 	syscall
 	
 	#Formatting
-	la	$a0,	newLine
-	li	$v0,	4
-	syscall
-	la	$a0,	deividerString
-	li	$v0,	4
-	syscall
-	la	$a0,	newLine
-	li	$v0,	4
-	syscall
+	la	$a0,	newLine			#Not Necessary but Recommanded
+	li	$v0,	4			#Not Necessary but Recommanded
+	syscall					#Not Necessary but Recommanded
+	la	$a0,	deividerString		#Not Necessary
+	li	$v0,	4			#Not Necessary
+	syscall					#Not Necessary
+	la	$a0,	newLine			#Not Necessary
+	li	$v0,	4			#Not Necessary
+	syscall					#Not Necessary
 
-Loop:	j	main
+Loop:	j	main				#Loop back for second run
 
 fact:
 	addi	$sp,	$sp,	-8
