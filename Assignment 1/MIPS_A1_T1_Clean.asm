@@ -19,13 +19,13 @@
 main:
 	#Prompt To Input
 	la 	$a0,	firstPromptString
-	li	$v0,	4
+	li	$v0,	4			# 4 is system call for printing string
 	syscall 
 	
 	#Input Reading
 	la	$a0,	inputString
-	li	$a1,	61
-	li	$v0,	8
+	li	$a1,	61			# 61 is for the length of the input
+	li	$v0,	8			# 8 is system call for reading string
 	syscall
 
 	#Address Setup
