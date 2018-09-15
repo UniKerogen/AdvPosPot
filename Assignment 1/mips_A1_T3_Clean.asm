@@ -46,14 +46,14 @@ resultYes:
 	syscall
 	j	Exit
 	
-Exit:	la 	$a0,	deividerString		#Loop Back
-	li	$v0,	4
-	syscall
-	la	$a0,	newLine
-	li	$v0,	4
-	syscall
+Exit:	la 	$a0,	deividerString		#Not Necessary But Recommanded
+	li	$v0,	4			#Not Necessary but Recommanded
+	syscall					#Not Necessary but Recommanded
+	la	$a0,	newLine			#Not Necessary but Recommanded
+	li	$v0,	4			#Not Necessary but Recommanded
+	syscall					#Not Necessary but Recommanded
 	
-	j	main
+	j	main				#Loop back for second run
 
 #------Sub Function-------#
 
