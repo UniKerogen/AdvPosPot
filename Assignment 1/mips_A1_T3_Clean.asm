@@ -13,6 +13,8 @@
 .text 	
 
 main:
+	li 	$t6,	0			#Clena up Memory
+	li	$t7,	0			#Clean up Memory
 	#Prompt To Input
 	la 	$a0,	firstPromptString
 	li	$v0,	4
@@ -41,6 +43,8 @@ resultNo:
 	j	Exit
 	
 resultYes:
+	add	$t7,	$t6,	$t7
+	beq	$t7,	1,	resultNo	#Mismatch in ( & )
 	la	$a0,	validString		#Print Valid Result
 	li	$v0,	4
 	syscall
@@ -61,6 +65,14 @@ findMatch:
 	lb	$t2,	($s2)			#User Input
 	lb	$t3,	($s3)			#Match Location
 	
+	bne	$t2,	'(',	subStep1	#Match the first (
+	li	$t6,	1
+	
+subStep1:
+	bne	$t2,	')',	subStep2	#Clear Flag if there is )
+	li	$t7,	1
+	
+subStep2:
 	beq	$t2,	$zero,	resultYes	#Exit loop when Input reaches 0
 	beq	$t3,	$zero,	resultNo	#Exit loop when Match reaches 0
 	
