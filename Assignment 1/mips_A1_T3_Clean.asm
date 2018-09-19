@@ -4,7 +4,7 @@
 	validString:		.asciiz		"Valid Input \n"
 	newLine:		.asciiz		"\n"
 	deividerString:		.asciiz 	"--------------------"
-	matchString:		.asciiz		"1234567890()+-*/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\n"
+	matchString:		.asciiz		"1234567890()+-*/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz \n"
 
 .data 0x10010100
 	userInput:		.space		63
@@ -16,11 +16,7 @@
 ##In this, we are only looking at some simple examples that assuming the error is coming from "mis-type", to some extent.
 ##By that, I mean, you DON'T randomly type in any random string on purpose.
 
-main:
-	li 	$t6,	0			#Clean up Memory
-	li	$t7,	0			#Clean up Memory
-	li	$s4,	0			#Clean up Memory
-	
+main:	
 	#Prompt To Input
 	la 	$a0,	firstPromptString
 	li	$v0,	4
@@ -40,18 +36,22 @@ main:
 	move	$t4,	$s3			#Store Initial Location
 	li	$t5,	70			#Number of total Character
 	
+	li 	$t6,	0			#Clean up Memory
+	li	$t7,	0			#Clean up Memory
+	li	$s4,	0			#Clean up Memory
+	
 	j	findMatch			#Intilize Match Sequence
 	
 resultNo:
 	la	$a0,	invalidString		#Print invalid Result
-	li	$v0,	4
+	li	$v0,	4			#4 is the System Call for print
 	syscall
 	j	Exit
 	
 resultYes:
 	bne	$t7,	$t6,	resultNo	#Mismatch in '(' & ')'
 	la	$a0,	validString		#Print Valid Result
-	li	$v0,	4
+	li	$v0,	4			#4 is the System Call for print
 	syscall
 	j	Exit
 	
@@ -69,15 +69,26 @@ Exit:	la 	$a0,	deividerString		#Not Necessary But Recommanded
 findMatch:
 	lb	$t2,	($s2)			#Load User Input
 	lb	$t3,	($s3)			#Load Match Location
+
+	beq	$t2,	$zero,	resultYes	#Exit Loop when Input reaches 0
+	beq	$t3,	$zero,	resultNo	#Exit Loop when Match reaches 0
+	
+	bne 	$t2,	$t3,	nextComparison
+	beq	$t2,	$t3,	twoSameOperators
+	
+nextComparison:
+	addi	$s3,	$s3,	1		#Increase the Match Location Count Only
+	sub	$t5,	$t5,	1		#Decrease number count
+	j	findMatch
 	
 twoSameOperators:
 	addi	$s1,	$s2,	1		#Load Next Location
 	lb	$t1,	($s1)			#Load Next Character
 	bne	$t1,	$t2,	multiEqualSign	#Check Similarity of Adjacent Character
-	beq	$t2,	'+',	resultNo	#Only Exit if they are Operators
-	beq	$t2,	'-',	resultNo
-	beq	$t2,	'*',	resultNo
-	beq	$t2,	'/',	resultNo
+	beq	$t2,	'+',	resultNo	#Exit loop if ++ occures
+	beq	$t2,	'-',	resultNo	#Exit loop if -- occures
+	beq	$t2,	'*',	resultNo	#Exit loop if ** occures
+	beq	$t2,	'/',	resultNo	#Exit loop if // occures
 	
 multiEqualSign:					#Find and Count the Number of Equal Sign
 	bne	$t2,	'=',	frontParenthesis
@@ -86,28 +97,25 @@ multiEqualSign:					#Find and Count the Number of Equal Sign
 	
 frontParenthesis:				#Find and Mark Apparence of (
 	bne	$t2,	'(',	backParenthesis
-	addi	$t6,	$t6,	1
+	addi	$t6,	$t6,	1		#Add ( Count
 	
 backParenthesis:
-	bne	$t2,	')',	nextStep	#Find and Mark Apparence of )
-	addi	$t7,	$t7,	1
-	
-nextStep:
-	beq	$t2,	$zero,	resultYes	#Exit Loop when Input reaches 0
-	beq	$t3,	$zero,	resultNo	#Exit Loop when Match reaches 0
-	
-	bne 	$t2,	$t3,	nextComparison
-	beq	$t2,	$t3,	nextCharacter
-	
-nextComparison:
-	addi	$s3,	$s3,	1		#Increase the Match Location Count Only
-	sub	$t5,	$t5,	1		#Decrease number count
-	j	findMatch
-	
-nextCharacter:
+	bne	$t2,	')',	restartLoop	#Find and Mark Apparence of )
+	addi	$t7,	$t7,	1		#Add ) Count
+	addi	$s1,	$s2,	1
+	lb	$t1,	($s1)
+	beq	$t1,	'+',	restartLoop	#Check if ) is Followed by operators
+	beq	$t1,	'-',	restartLoop
+	beq	$t1,	'*',	restartLoop
+	beq	$t1,	'/',	restartLoop
+	beq	$t1,	'\n',	restartLoop
+	j	resultNo
+
+#Loop Back to Restart
+restartLoop:
 	addi	$s2,	$s2,	1		#Increase the Input Location Count Only
 	li	$t5,	70			#Reset number Count
-	move	$s3,	$t4
+	move	$s3,	$t4			#Reset Location
 	j	findMatch
 	
 
