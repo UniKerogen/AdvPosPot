@@ -17,7 +17,7 @@
 ##By that, I mean, you DON'T randomly type in any random string on purpose.
 
 main:
-	li 	$t6,	0			#Clena up Memory
+	li 	$t6,	0			#Clean up Memory
 	li	$t7,	0			#Clean up Memory
 	li	$s4,	0			#Clean up Memory
 	
