@@ -84,11 +84,17 @@ nextComparison:
 twoSameOperators:
 	addi	$s1,	$s2,	1		#Load Next Location
 	lb	$t1,	($s1)			#Load Next Character
-	bne	$t1,	$t2,	multiEqualSign	#Check Similarity of Adjacent Character
-	beq	$t2,	'+',	resultNo	#Exit loop if ++ occures
-	beq	$t2,	'-',	resultNo	#Exit loop if -- occures
-	beq	$t2,	'*',	resultNo	#Exit loop if ** occures
-	beq	$t2,	'/',	resultNo	#Exit loop if // occures
+	beq	$t2,	'+',	secondOperator	#Check the First Operator
+	beq	$t2,	'-',	secondOperator	#Jump to Check the Second Operator
+	beq	$t2,	'*',	secondOperator	#If this Character is an Operator
+	beq	$t2,	'/',	secondOperator	
+	j	multiEqualSign
+secondOperator:					#Check the Second Operator
+	beq	$t1,	'+',	resultNo	#Exit Loop
+	beq	$t1,	'-',	resultNo	#If the Second Character is also an Operator
+	beq	$t1,	'*',	resultNo	
+	beq	$t1,	'/',	resultNo	
+	j	multiEqualSign
 	
 multiEqualSign:					#Find and Count the Number of Equal Sign
 	bne	$t2,	'=',	frontParenthesis
@@ -98,6 +104,7 @@ multiEqualSign:					#Find and Count the Number of Equal Sign
 frontParenthesis:				#Find and Mark Apparence of (
 	bne	$t2,	'(',	backParenthesis
 	addi	$t6,	$t6,	1		#Add ( Count
+	beq	$t1, 	')',	resultNo	#Exit Loop if the next Character is )
 	
 backParenthesis:
 	bne	$t2,	')',	restartLoop	#Find and Mark Apparence of )
