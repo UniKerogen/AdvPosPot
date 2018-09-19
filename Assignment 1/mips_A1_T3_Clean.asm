@@ -9,12 +9,18 @@
 .data 0x10010100
 	userInput:		.space		63
 	
-
 .text 	
+
+##!!!Read This!!!
+##There are way too many combinations that consists only A-Z, a-z, 0-9, +-*/= will return error in MATLAB
+##In this, we are only looking at some simple examples that assuming the error is coming from "mis-type", to some extent.
+##By that, I mean, you DON'T randomly type in any string on purpose.
 
 main:
 	li 	$t6,	0			#Clena up Memory
 	li	$t7,	0			#Clean up Memory
+	li	$s4,	0			#Clean up Memory
+	
 	#Prompt To Input
 	la 	$a0,	firstPromptString
 	li	$v0,	4
@@ -34,7 +40,7 @@ main:
 	move	$t4,	$s3			#Store Initial Location
 	li	$t5,	70			#Number of total Character
 	
-	j	findMatch
+	j	findMatch			#Intilize Match Sequence
 	
 resultNo:
 	la	$a0,	invalidString		#Print invalid Result
@@ -43,8 +49,7 @@ resultNo:
 	j	Exit
 	
 resultYes:
-	add	$t7,	$t6,	$t7
-	beq	$t7,	1,	resultNo	#Mismatch in ( & )
+	beq	$t7,	$t6,	resultNo	#Mismatch in '(' & ')'
 	la	$a0,	validString		#Print Valid Result
 	li	$v0,	4
 	syscall
@@ -65,21 +70,27 @@ findMatch:
 	lb	$t2,	($s2)			#User Input
 	lb	$t3,	($s3)			#Match Location
 	
-	bne	$t2,	'(',	subStep1	#Match the first (
-	li	$t6,	1
+multipleEqualSign:				#Find and Count the Number of Equal Sign
+	bne	$t2,	'=',	frontParenthesis
+	addi	$s4,	$s4,	1
+	beq	$s4,	2,	resultNo	#Exit Loop when there is more than one =
 	
-subStep1:
-	bne	$t2,	')',	subStep2	#Clear Flag if there is )
-	li	$t7,	1
+frontParenthesis:				#Find and Mark Apparence of (
+	bne	$t2,	'(',	backParenthesis
+	addi	$t6,	$t6,	1
 	
-subStep2:
-	beq	$t2,	$zero,	resultYes	#Exit loop when Input reaches 0
-	beq	$t3,	$zero,	resultNo	#Exit loop when Match reaches 0
-	
-	bne 	$t2,	$t3,	nextStep
-	beq	$t2,	$t3,	nextCharacter
+backParenthesis:
+	bne	$t2,	')',	nextStep	#Find and Mark Apparence of )
+	addi	$t7,	$t7,	1
 	
 nextStep:
+	beq	$t2,	$zero,	resultYes	#Exit Loop when Input reaches 0
+	beq	$t3,	$zero,	resultNo	#Exit Loop when Match reaches 0
+	
+	bne 	$t2,	$t3,	nextComparison
+	beq	$t2,	$t3,	nextCharacter
+	
+nextComparison:
 	addi	$s3,	$s3,	1		#Increase the Match Location Count Only
 	sub	$t5,	$t5,	1		#Decrease number count
 	j	findMatch

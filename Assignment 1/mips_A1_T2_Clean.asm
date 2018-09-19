@@ -22,7 +22,7 @@ main:
 	syscall
 	move	$a0,	$v0			#Input is stored in a0
 	
-	jal	fact
+	jal	fact				#Initialize Factorial Sequence
 	move	$t1,	$v0			#Output is stored in t1
 	
 	#Print the Result
@@ -48,7 +48,7 @@ main:
 Loop:	j	main				#Loop back for second run
 
 fact:
-	addi	$sp,	$sp,	-8
+	addi	$sp,	$sp,	-8		#Set $sp
 	sw	$ra,	4($sp)
 	sw	$a0,	0($sp)
 	slti	$t0,	$a0, 	1
@@ -56,12 +56,12 @@ fact:
 	addi	$v0,	$zero,	1
 	addi	$sp,	$sp,	8
 	jr	$ra
-L1:	addi	$a0,	$a0,	-1
+L1:	addi	$a0,	$a0,	-1		#The input is used in $a0
 	jal	fact
 	lw	$a0,	0($sp)
 	lw	$ra,	4($sp)
-	addi	$sp,	$sp,	8
-	mul	$v0,	$a0,	$v0
+	addi	$sp,	$sp,	8		#Reset $sp
+	mul	$v0,	$a0,	$v0		#The result will be output in $v0
 	jr	$ra
 
 	
