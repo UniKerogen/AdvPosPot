@@ -49,7 +49,7 @@ resultNo:
 	j	Exit
 	
 resultYes:
-	beq	$t7,	$t6,	resultNo	#Mismatch in '(' & ')'
+	bne	$t7,	$t6,	resultNo	#Mismatch in '(' & ')'
 	la	$a0,	validString		#Print Valid Result
 	li	$v0,	4
 	syscall
