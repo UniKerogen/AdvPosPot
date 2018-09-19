@@ -18,14 +18,14 @@
 
 main:	
 	#Prompt To Input
-	la 	$a0,	firstPromptString
-	li	$v0,	4
+	la 	$a0,	firstPromptString	#Prompt the first string 
+	li	$v0,	4			#4 is the System Call for Printing
 	syscall 
 	
 	#Input Reading
-	la	$a0,	userInput
-	li	$a1,	61
-	li	$v0,	8
+	la	$a0,	userInput		#Load Input Address
+	li	$a1,	61			#Assign Input Length
+	li	$v0,	8			#8 is the System Call for reading string
 	syscall
 	
 	#Initialize String Location
@@ -44,14 +44,14 @@ main:
 	
 resultNo:
 	la	$a0,	invalidString		#Print invalid Result
-	li	$v0,	4			#4 is the System Call for print
+	li	$v0,	4			#4 is the System Call for Printing
 	syscall
 	j	Exit
 	
 resultYes:
 	bne	$t7,	$t6,	resultNo	#Mismatch in '(' & ')'
 	la	$a0,	validString		#Print Valid Result
-	li	$v0,	4			#4 is the System Call for print
+	li	$v0,	4			#4 is the System Call for Printing
 	syscall
 	j	Exit
 	
