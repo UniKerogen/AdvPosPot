@@ -74,14 +74,14 @@ findMatch:
 	beq	$t3,	$zero,	resultNo	#Exit Loop when Match reaches 0
 	
 	bne 	$t2,	$t3,	nextComparison
-	beq	$t2,	$t3,	twoSameOperators
+	beq	$t2,	$t3,	twoOperators
 	
 nextComparison:
 	addi	$s3,	$s3,	1		#Increase the Match Location Count Only
 	sub	$t5,	$t5,	1		#Decrease number count
 	j	findMatch
 	
-twoSameOperators:
+twoOperators:
 	addi	$s1,	$s2,	1		#Load Next Location
 	lb	$t1,	($s1)			#Load Next Character
 	beq	$t2,	'+',	secondOperator	#Check the First Operator
