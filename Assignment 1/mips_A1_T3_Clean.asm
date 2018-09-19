@@ -14,7 +14,7 @@
 ##!!!Read This!!!
 ##There are way too many combinations that consists only A-Z, a-z, 0-9, +-*/= will return error in MATLAB
 ##In this, we are only looking at some simple examples that assuming the error is coming from "mis-type", to some extent.
-##By that, I mean, you DON'T randomly type in any string on purpose.
+##By that, I mean, you DON'T randomly type in any random string on purpose.
 
 main:
 	li 	$t6,	0			#Clena up Memory
