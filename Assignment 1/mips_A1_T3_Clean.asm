@@ -67,10 +67,19 @@ Exit:	la 	$a0,	deividerString		#Not Necessary But Recommanded
 #------Sub Function-------#
 
 findMatch:
-	lb	$t2,	($s2)			#User Input
-	lb	$t3,	($s3)			#Match Location
+	lb	$t2,	($s2)			#Load User Input
+	lb	$t3,	($s3)			#Load Match Location
 	
-multipleEqualSign:				#Find and Count the Number of Equal Sign
+twoSameOperators:
+	addi	$s1,	$s2,	1		#Load Next Location
+	lb	$t1,	($s1)			#Load Next Character
+	bne	$t1,	$t2,	multiEqualSign	#Check Similarity of Adjacent Character
+	beq	$t2,	'+',	resultNo	#Only Exit if they are Operators
+	beq	$t2,	'-',	resultNo
+	beq	$t2,	'*',	resultNo
+	beq	$t2,	'/',	resultNo
+	
+multiEqualSign:					#Find and Count the Number of Equal Sign
 	bne	$t2,	'=',	frontParenthesis
 	addi	$s4,	$s4,	1
 	beq	$s4,	2,	resultNo	#Exit Loop when there is more than one =
