@@ -111,6 +111,7 @@ frontParenthesis:				#Find and Mark Apparence of (
 	beq	$t1,	'-',	resultNo
 	beq	$t1,	'*',	resultNo
 	beq	$t1,	'/',	resultNo
+	beq	$t1,	'=',	resultNo
 	
 backParenthesis:
 	bne	$t2,	')',	restartLoop	#Find and Mark Apparence of )
