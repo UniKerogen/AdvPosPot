@@ -105,6 +105,12 @@ frontParenthesis:				#Find and Mark Apparence of (
 	bne	$t2,	'(',	backParenthesis
 	addi	$t6,	$t6,	1		#Add ( Count
 	beq	$t1, 	')',	resultNo	#Exit Loop if the next Character is )
+	addi	$s1,	$s2,	1
+	lb	$t1,	($s1)
+	beq	$t1,	'+',	resultNo	#Check if ( is Followed by operators
+	beq	$t1,	'-',	resultNo
+	beq	$t1,	'*',	resultNo
+	beq	$t1,	'/',	resultNo
 	
 backParenthesis:
 	bne	$t2,	')',	restartLoop	#Find and Mark Apparence of )
