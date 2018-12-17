@@ -7,7 +7,7 @@
 #	copyright ©	Kerogen.	All rights reserved.
 
 .include "mips_A2_Macro_U.asm"
- 
+  
 
 .text
 ##------Input Reading Function------##
