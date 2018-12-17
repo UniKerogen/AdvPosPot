@@ -11,3 +11,5 @@ You should comment your code.
 **NOTICE**
 
 1.  G file is only a demo for a possible approach of dealing with this problem. It is **NOT** finished and commented to some extent. Sub-functions are **NOT** included in the asm file. **_IT WILL NOT RUN AS A FINAL RESULT_**
+
+2. U version of the file is genearlly working with negative not designed into the program and variable wiredly bugged out in U update.
