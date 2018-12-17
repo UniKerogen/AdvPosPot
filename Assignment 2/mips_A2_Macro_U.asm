@@ -3,8 +3,8 @@
 #	MIPS Assignment 2
 #
 #
-#	Created by Kuang Jiang on 10/9/18.
-#	copyright ©	Kuang Jiang.	All rights reserved.
+#	Created by Kerogen on 10/9/18.
+#	copyright ©	Kerogen.	All rights reserved.
 
 
 
