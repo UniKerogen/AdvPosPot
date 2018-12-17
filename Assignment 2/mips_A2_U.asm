@@ -3,10 +3,10 @@
 #	MIPS Assignment 2
 #
 #
-#	Created by Kuang Jiang on 10/9/18.
-#	copyright ©	Kuang Jiang.	All rights reserved.
+#	Created by Kerogen on 10/9/18.
+#	copyright ©	Kerogen.	All rights reserved.
 
-.include "mips_A2_Macro_Kuang_Jiang_U.asm"
+.include "mips_A2_Macro_U.asm"
  
 
 .text
