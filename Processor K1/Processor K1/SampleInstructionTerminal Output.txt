@@ -1,0 +1,171 @@
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+--Instruction Memory Module--
+instructionMemory Module Initializing...
+### Instruction Memory Module Reset ###
+### Memory Module Reset ###
+### ALU Module Reset ###
+### Memory Module Reset ###
+### Memory Module Reset ###
+### Branch Module Reset ###
+### Jump Module Reset ###
+### Done Mux Module Reset ###
+### NPI Module Reset ###
+-initialization done
+--- Memory Read Module ---
+--Branch Module--
+Branch Module not enabled
+--Jump Module--
+Jump not enbaled
+--InstructionMemory Module--
+Current Instruction: 086f0000
+---- ALU Module ----
+Num1:         400
+Num2:        -300
+Control: 000
+ALU Result:                   100
+----- Memory Write Module ---
+Memory Write Address                    7, Data                  100
+----- Memory Write Module ---
+Memory Write Address                    8, Data                    0
+--doneMux Executed--
+----- Next Program Identifier --
+One cycle Done
+Next program:   1
+### Instruction Memory Module Reset ###
+### Memory Module Reset ###
+### ALU Module Reset ###
+### Memory Module Reset ###
+### Memory Module Reset ###
+### Branch Module Reset ###
+### Jump Module Reset ###
+### Done Mux Module Reset ###
+### NPI Module Reset ###
+--InstructionMemory Module--
+Current Instruction: 42ef0000
+--- Memory Read Module ---
+--Branch Module--
+Branch Module not enabled
+--Jump Module--
+Jump not enbaled
+---- ALU Module ----
+Num1:         100
+Num2:         100
+Control: 010
+ALU Result:                 10000
+----- Memory Write Module ---
+Memory Write Address                    7, Data                10000
+----- Memory Write Module ---
+Memory Write Address                    8, Data                    0
+--doneMux Executed--
+----- Next Program Identifier --
+One cycle Done
+Next program:   2
+### Instruction Memory Module Reset ###
+### Memory Module Reset ###
+### ALU Module Reset ###
+### Memory Module Reset ###
+### Memory Module Reset ###
+### Branch Module Reset ###
+### Jump Module Reset ###
+### Done Mux Module Reset ###
+### NPI Module Reset ###
+--InstructionMemory Module--
+Current Instruction: 44b34000
+--- Memory Read Module ---
+--Branch Module--
+Branch Module not enabled
+--Jump Module--
+Jump not enbaled
+---- ALU Module ----
+Num1:         203
+Num2:         100
+Control: 010
+ALU Result:                 20300
+----- Memory Write Module ---
+Memory Write Address                    9, Data                20300
+----- Memory Write Module ---
+Memory Write Address                   10, Data                    0
+--doneMux Executed--
+----- Next Program Identifier --
+One cycle Done
+Next program:   3
+### Instruction Memory Module Reset ###
+### Memory Module Reset ###
+### ALU Module Reset ###
+### Memory Module Reset ###
+### Memory Module Reset ###
+### Branch Module Reset ###
+### Jump Module Reset ###
+### Done Mux Module Reset ###
+### NPI Module Reset ###
+--InstructionMemory Module--
+Current Instruction: 2f2f0000
+--- Memory Read Module ---
+--Branch Module--
+Branch Module not enabled
+--Jump Module--
+Jump not enbaled
+---- ALU Module ----
+Num1:       10000
+Num2:       20300
+Control: 001
+ALU Result:                -10300
+----- Memory Write Module ---
+Memory Write Address                    7, Data 18446744073709541316
+----- Memory Write Module ---
+Memory Write Address                    8, Data                    0
+--doneMux Executed--
+----- Next Program Identifier --
+One cycle Done
+Next program:   4
+### Instruction Memory Module Reset ###
+### Memory Module Reset ###
+### ALU Module Reset ###
+### Memory Module Reset ###
+### Memory Module Reset ###
+### Branch Module Reset ###
+### Jump Module Reset ###
+### Done Mux Module Reset ###
+### NPI Module Reset ###
+--InstructionMemory Module--
+Current Instruction: 6ed78000
+--- Memory Read Module ---
+--Branch Module--
+Branch Module not enabled
+--Jump Module--
+Jump not enbaled
+---- ALU Module ----
+Num1:      -10300
+Num2:           3
+Control: 011
+ALU Result:                 -3433
+ALU Result:                     1
+----- Memory Write Module ---
+Memory Write Address                   11, Data 18446744073709548183
+----- Memory Write Module ---
+Memory Write Address                   12, Data                    1
+--doneMux Executed--
+----- Next Program Identifier --
+One cycle Done
+Next program:   5
+### Instruction Memory Module Reset ###
+### Memory Module Reset ###
+### ALU Module Reset ###
+### Memory Module Reset ###
+### Memory Module Reset ###
+### Branch Module Reset ###
+### Jump Module Reset ###
+### Done Mux Module Reset ###
+### NPI Module Reset ###
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'processor_testbench_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:03 ; elapsed = 00:00:06 . Memory (MB): peak = 935.289 ; gain = 0.000
